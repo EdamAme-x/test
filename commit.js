@@ -15,7 +15,7 @@ async function gitter() {
     });
 
     await Deno.run({
-        cmd: ["git", "commit", "-m", "Commit!"],
+        cmd: ["git", "commit", "-m", "Commit:" + num],
     })
 
     await Deno.run({
