@@ -1,13 +1,15 @@
 async function gitter() {
 
-    const nowJSON = Deno.readFileSync("commit.json");
-
     const newJSON = {
-        "num": JSON.parse(nowJSON).num + 1
+        "time": Date.now()
     }
 
-    Deno.writeFileSync("commit.json", JSON.stringify(newJSON));
+    const encoder = new TextEncoder();
+    const contentBytes = encoder.encode(JSON.stringify(newJSON));
+
+    await Deno.writeFileSync("commit.json", contentBytes);
     
+    console.log("gitter: " + num);
     await Deno.run({
         cmd: ["git", "add", "."],
     });
@@ -19,6 +21,11 @@ async function gitter() {
     await Deno.run({
         cmd: ["git", "push"]
     })
+
+    num++;
 }
 
+let num = 0;
+
+gitter();
 setInterval(gitter, 10000)
