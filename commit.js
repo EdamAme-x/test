@@ -25,7 +25,7 @@ async function gitter() {
     num++;
 }
 
-let num = 0;
+let num = 75;
 
 gitter();
-setInterval(gitter, 10000)
+setInterval(gitter, 15000)
