@@ -14,13 +14,17 @@ async function gitter() {
         cmd: ["git", "add", "."],
     });
 
-    await Deno.run({
-        cmd: ["git", "commit", "-m", "Commit:" + num],
-    })
+    setTimeout(async () => {
+        await Deno.run({
+            cmd: ["git", "commit", "-m", "Commit:" + num],
+        })
 
-    await Deno.run({
-        cmd: ["git", "push"]
-    })
+        setTimeout(async () => {
+            await Deno.run({
+                cmd: ["git", "push"]
+            })
+        }, 2500)
+    }, 2500)
 
     num++;
 }
@@ -28,4 +32,4 @@ async function gitter() {
 let num = 75;
 
 gitter();
-setInterval(gitter, 15000)
+setInterval(gitter, 10000)
